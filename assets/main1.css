@@ -1,0 +1,10 @@
+.abc .bcd {
+  background-color: #fff;
+  -webkit-transform: rotateX(60deg);
+          transform: rotateX(60deg); }
+
+.abc .bcd {
+  background-color: #000; }
+
+
+/*# sourceMappingURL=main1.css.map*/

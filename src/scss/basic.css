@@ -1,0 +1,4 @@
+.abc .bcd {
+  background-color: #fff;
+  transform: rotateX(60deg);
+}
