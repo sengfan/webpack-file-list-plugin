@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/scss/basic.scss":
-/*!*****************************!*\
-  !*** ./src/scss/basic.scss ***!
-  \*****************************/
+/***/ "./demo/src/scss/basic.scss":
+/*!**********************************!*\
+  !*** ./demo/src/scss/basic.scss ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -97,10 +97,10 @@
 
 /***/ }),
 
-/***/ "./src/scss/basic2.scss":
-/*!******************************!*\
-  !*** ./src/scss/basic2.scss ***!
-  \******************************/
+/***/ "./demo/src/scss/basic2.scss":
+/*!***********************************!*\
+  !*** ./demo/src/scss/basic2.scss ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -109,14 +109,14 @@
 /***/ }),
 
 /***/ 0:
-/*!**********************************************************!*\
-  !*** multi ./src/scss/basic.scss ./src/scss/basic2.scss ***!
-  \**********************************************************/
+/*!********************************************************************!*\
+  !*** multi ./demo/src/scss/basic.scss ./demo/src/scss/basic2.scss ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./src/scss/basic.scss */"./src/scss/basic.scss");
-module.exports = __webpack_require__(/*! ./src/scss/basic2.scss */"./src/scss/basic2.scss");
+__webpack_require__(/*! ./demo/src/scss/basic.scss */"./demo/src/scss/basic.scss");
+module.exports = __webpack_require__(/*! ./demo/src/scss/basic2.scss */"./demo/src/scss/basic2.scss");
 
 
 /***/ })

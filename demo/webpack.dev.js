@@ -3,7 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        main1: ['./src/scss/basic.scss', './src/scss/basic2.scss']
+        
+        main1: ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss']
         /*     singleFile: './src/scss/basic2.scss',
         importFile: './src/scss/index.scss' */
     },

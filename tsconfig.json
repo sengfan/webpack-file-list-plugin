@@ -3,12 +3,16 @@
 
         "module": "commonjs",
         "target": "es5",
-        "lib": ["es6", "dom"],
+        "lib": ["es6", "dom", "esnext"],
         "outDir": "dist",
         "sourceMap": true
     },
+    "include": [
+        "src/index.ts"
+    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "**/*.spec.ts"
     ]
 
 }
