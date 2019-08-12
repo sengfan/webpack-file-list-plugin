@@ -1,6 +1,9 @@
 module.exports = {
     plugins: {
-        autoprefixer: { browsers: ['last 2 versions'], grid: true }
+        autoprefixer: { browsers: ['last 2 versions'], grid: true },
+        'postcss-clean': {
+            level: 2
+        }
     },
     sourceMap: true
 };

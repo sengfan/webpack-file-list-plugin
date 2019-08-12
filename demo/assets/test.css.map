@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./<input css 1>"],"names":[],"mappings":"AAAA,UAAU,sBAAsB,iCAAiC,wBAAwB,C","file":"test.css","sourcesContent":[".abc .bcd{background-color:#fff;-webkit-transform:rotateX(60deg);transform:rotateX(60deg)}"],"sourceRoot":""}

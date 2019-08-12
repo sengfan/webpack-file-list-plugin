@@ -3,8 +3,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        
-        main1: ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss']
+        test:'./demo/src/test.js',
+        main1: ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss'],
+        'TEST/INDEX': ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss']
         /*     singleFile: './src/scss/basic2.scss',
         importFile: './src/scss/index.scss' */
     },
@@ -23,10 +24,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        plugins: ['lodash'],
-                        presets: ['@wordpress/default']
-                    }
+                  
                 }
             },
             {
