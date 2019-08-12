@@ -6,11 +6,11 @@ const MiniCssExtractPluginCleanup = require('../dist/index')
 module.exports = {
     mode: 'development',
     entry: {
-        /*    importFile: './demo/src/scss/index.scss',
-        '/basic2.css': './demo/src/scss/basic2.scss',*/
-
+        test:'./demo/src/test.js',
         main1: ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss'],
-        test: './demo/src/test.js'
+        'TEST/INDEX': ['./demo/src/scss/basic.scss', './demo/src/scss/basic2.scss']
+        /*     singleFile: './src/scss/basic2.scss',
+        importFile: './src/scss/index.scss' */
     },
     devtool: 'source-map',
     output: {
@@ -26,7 +26,8 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                  
                 }
             },
             {
