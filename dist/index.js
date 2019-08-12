@@ -1,14 +1,52 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var glob = require("glob");
-// get all the
-var getAllScss = function (patterns) {
-    if (patterns === void 0) { patterns = ['./']; }
-    patterns.map(function (pattern) {
-        glob.sync(pattern);
-    });
+var path = require("path");
+/**
+ * @description : Creating wildcarded entry point and dynamically named outputs base on the entry name
+ * @default  pattern:  pattern: `**bundle.scss`,ignore: ['/node_modules'], outPutFolderName: 'css', globOption: {}
+ * @param {*} options:{pattern:string, ignore : string[], outPutFolder?:string, globOption?:Object }
+ */
+exports.getScssEntry = function (options) {
+    var defaultOption = {
+        pattern: "**/**bundle.scss",
+        ignore: ['/node_modules'],
+        outPutFolderName: 'css',
+        globOption: {}
+    };
+    if (options === undefined) {
+    }
+    var _a = Object.assign({}, defaultOption, options), pattern = _a.pattern, ignore = _a.ignore, outPutFolderName = _a.outPutFolderName, globOption = _a.globOption;
+    globOption = {
+        ignore: ignore.slice()
+    };
+    var fileList = glob.sync(pattern, globOption);
+    console.log(fileList);
+    var entryPoint = {};
+    if (fileList.length > 0) {
+        fileList.forEach(function (filePath) {
+            var fileName = path.basename(filePath, path.extname(filePath));
+            var subFolder;
+            if (fileName.indexOf('.cb2') > 0) {
+                subFolder = 'cb2';
+            }
+            else if (fileName.indexOf('.crate') > 0) {
+                subFolder = 'crate';
+            }
+            else {
+                subFolder = 'common';
+            }
+            var outPutPath = outPutFolderName + "/" + subFolder + "/" + fileName;
+            entryPoint[outPutPath] = filePath;
+        });
+    }
+    return entryPoint;
 };
-var scssEntries = glob.sync('./**/*Spec.js');
+/**
+ * @description Generate the map json file with content hash for the assets
+ * @export
+ * @class AssetMapPlugin
+ */
 var AssetMapPlugin = /** @class */ (function () {
     function AssetMapPlugin() {
     }
@@ -85,6 +123,11 @@ var AssetMapPlugin = /** @class */ (function () {
     return AssetMapPlugin;
 }());
 exports.default = AssetMapPlugin;
+/**
+ * @description Clean the empty js caused by pure css/scss entry
+ * @export
+ * @class MiniCssExtractPluginCleanup
+ */
 var MiniCssExtractPluginCleanup = /** @class */ (function () {
     function MiniCssExtractPluginCleanup() {
     }

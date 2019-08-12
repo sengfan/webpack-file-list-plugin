@@ -1,17 +1,67 @@
-import { Stats, compilation, NamedChunksPlugin } from 'webpack';
-import * as util from 'util';
-import * as fs from 'fs';
-import * as NormalModule from 'webpack/lib/NormalModule';
+/*
+ * @Author: Zhou Fang
+ * @Date: 2019-08-1 22:02:09
+ * @Last Modified by: Zhou Fang
+ * @Last Modified time: 2019-08-12 13:56:57
+ */
+import { compilation } from 'webpack';
 import * as glob from 'glob';
+import * as path from 'path';
 
-// get all the
-const getAllScss = (patterns: string[] = ['./']) => {
-    patterns.map(pattern => {
-        glob.sync(pattern);
-    });
+interface CssEntryOption {
+    pattern: string;
+    ignore: string[];
+    outPutFolder?: string;
+    globOption?: glob.IOptions;
+}
+/**
+ * @description : Creating wildcarded entry point and dynamically named outputs base on the entry name
+ * @default  pattern:  pattern: `**bundle.scss`,ignore: ['/node_modules'], outPutFolderName: 'css', globOption: {}
+ * @param {*} options:{pattern:string, ignore : string[], outPutFolder?:string, globOption?:Object }
+ */
+export const getScssEntry = (options: CssEntryOption) => {
+    const defaultOption = {
+        pattern: `**/**bundle.scss`,
+        ignore: ['/node_modules'],
+        outPutFolderName: 'css',
+        globOption: {}
+    };
+    if (options === undefined) {
+    }
+    let { pattern, ignore, outPutFolderName, globOption } = Object.assign(
+        {},
+        defaultOption,
+        options
+    );
+    globOption = {
+        ignore: [...ignore]
+    };
+    const fileList = glob.sync(pattern, globOption);
+    console.log(fileList);
+    const entryPoint = {};
+    if (fileList.length > 0) {
+        fileList.forEach(filePath => {
+            const fileName = path.basename(filePath, path.extname(filePath));
+            let subFolder;
+            if (fileName.indexOf('.cb2') > 0) {
+                subFolder = 'cb2';
+            } else if (fileName.indexOf('.crate') > 0) {
+                subFolder = 'crate';
+            } else {
+                subFolder = 'common';
+            }
+            const outPutPath = `${outPutFolderName}/${subFolder}/${fileName}`;
+            entryPoint[outPutPath] = filePath;
+        });
+    }
+    return entryPoint;
 };
-const scssEntries = glob.sync('./**/*Spec.js');
 
+/**
+ * @description Generate the map json file with content hash for the assets
+ * @export
+ * @class AssetMapPlugin
+ */
 export default class AssetMapPlugin {
     constructor() {}
     generateChunkMap(chunk: compilation.Chunk) {
@@ -95,13 +145,19 @@ export default class AssetMapPlugin {
         );
     }
 }
+
+/**
+ * @description Clean the empty js caused by pure css/scss entry
+ * @export
+ * @class MiniCssExtractPluginCleanup
+ */
 export class MiniCssExtractPluginCleanup {
     apply(compiler) {
         compiler.hooks.emit.tapAsync(
             'MiniCssExtractPluginCleanup',
-            (compilation, callback) => {
-                let jsFile = /\.js$/;
-                let jsMapFile = /\.js.map$/;
+            (compilation: compilation.Compilation, callback) => {
+                let jsFile: RegExp = /\.js$/;
+                let jsMapFile: RegExp = /\.js.map$/;
 
                 compilation.entrypoints.forEach(entrypoint => {
                     entrypoint.chunks.forEach(chunk => {
