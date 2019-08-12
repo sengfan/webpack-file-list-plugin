@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./demo/src/scss/C:/Users/sengfan/Desktop/webpack scss demo/demo/src/scss/basic.scss"],"names":[],"mappings":"AAAA;EAEQ;EACA;UAAA,2BAAyB","file":"test.css","sourcesContent":[".abc {\r\n    .bcd {\r\n        background-color: #fff;\r\n        transform: rotateX(60deg);\r\n    }\r\n}\r\n"],"sourceRoot":""}
